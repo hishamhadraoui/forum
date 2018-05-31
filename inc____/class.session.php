@@ -13,9 +13,9 @@ class AppSessionHandler extends SessionHandler
 	//private $sessionHote = '$_SERVER['HTTP_HOST']';
 	private $sessionSavePath = SESSION_SAVE_PATH;
 	
-	private $sessionCipherAlgo = MCRYPT_BLOWFISH;
-	private $sessionCipherMode = MCRYPT_MODE_ECB;
-	private $sessionCipherKey = 'MYCRYPTOK3Y@2016';
+	//private $sessionCipherAlgo = MCRYPT_BLOWFISH;
+	//private $sessionCipherMode = MCRYPT_MODE_CBC;
+	//private $sessionCipherKey = 'MYCRYPTOK3Y@2016';
 	private $ttl = 30;
 	//private $session = ;
 	
@@ -41,7 +41,7 @@ class AppSessionHandler extends SessionHandler
 
 	public function __get($key)
 	{
-		return false !== $_SESSION[$key] ? $_SESSION[$key] : false;
+		return (isset($_SESSION[$key])) ? $_SESSION[$key] : false;
 	}
 	
 	public function __set($key, $value)
@@ -56,14 +56,16 @@ class AppSessionHandler extends SessionHandler
 	
 	public function read($id)
 	{
-		return mcrypt_decrypt($this->sessionCipherAlgo, $this->sessionCipherKey, parent::read($id), $this->sessionCipherMode);  
+		return base64_decode(parent::read($id));
+		//return mcrypt_decrypt($this->sessionCipherAlgo, $this->sessionCipherKey, parent::read($id), $this->sessionCipherMode);  
 	}
 	
 	public function write($id, $data)
 	{
-		return parent::write($id, mcrypt_encrypt($this->sessionCipherAlgo, $this->sessionCipherKey, $data, $this->sessionCipherMode));
+		return parent::write($id, base64_encode($data));
+		//return parent::write($id, mcrypt_encrypt($this->sessionCipherAlgo, $this->sessionCipherKey, $data, $this->sessionCipherMode));
 	}
-	
+
 	
 	public function start()
 	{
@@ -119,7 +121,7 @@ class AppSessionHandler extends SessionHandler
 	private function generateFingerPrint()
 	{
 		$userAgentId = $_SERVER['HTTP_USER_AGENT'];
-		$this->cipherKey = mcrypt_create_iv(16);
+		$this->cipherKey = '&é8èçàà';  //mcrypt_create_iv(16);
 		$sessionId = session_id();
 		$this->fingerPrint = md5($userAgentId . $this->cipherKey . $sessionId);
 	}
@@ -147,34 +149,3 @@ class AppSessionHandler extends SessionHandler
 $session = new AppSessionHandler();
 $session->start();
 //$session->kill();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>
