@@ -1,28 +1,26 @@
-<?php
-$op = trim($_REQUEST['op']);  define("op", $op);
-$opi = trim($_GET['opi']);  define("opi", $opi);
-?> 
 <!DOCTYPE html PUBLIC "-//W3C//Ddiv XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=12.0, minimum-scale=.25, user-scalable=yes" name="viewport"/>
-<link href="../system/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="../system/css/bootstrap-rtl.min.css" rel="stylesheet" media="screen">
-<link href="../system/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
-<script type="text/javascript" src="../system/js/jquery-1.11.3-jquery.min.js"></script>
-<script src="../system/js/jquery.min.js"></script>
-<link rel="stylesheet" href="../system/css/style.css" type="text/css"  />
-<link rel="stylesheet" href="../system/css/cairo.css">
-<link rel="stylesheet" href="../system/css/font-awesome.min.css">
-<title><?php
-echo '*forum*';
-?>-<?php
-echo 'التنصيب';
-?></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=12.0, minimum-scale=.25, user-scalable=yes" name="viewport"/>
+	<link href="../system/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="../system/css/bootstrap-rtl.min.css" rel="stylesheet" media="screen">
+	<link href="../system/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" src="../system/js/jquery-1.11.3-jquery.min.js"></script>
+	<script src="../system/js/jquery.min.js"></script>
+	<link rel="stylesheet" href="../system/css/style.css" type="text/css"  />
+	<link rel="stylesheet" href="../system/css/cairo.css">
+	<link rel="stylesheet" href="../system/css/font-awesome.min.css">
+	<title><?= '*forum*-التنصيب'?></title>
 </head>
 <body>
+
 <?php
+	$op = trim($_GET['op'] ?? '');
+	define("op", $op);
+	
+	$opi = trim($_GET['opi'] ?? '');
+	define("opi", $opi);
 
 				echo '<nav class="navbar navbar-default">
 <div class="container-fluid">
