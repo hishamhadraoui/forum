@@ -1,0 +1,37 @@
+RewriteEngine On
+
+RewriteRule ^forum.php&id=([0-9]+)$ home.php?op=forum&id=$1 [L]
+RewriteRule ^forum.php&id=([0-9]+)&page=([0-9]+)$ home.php?op=forum&id=$1&page=$2 [L]
+RewriteRule ^topic.php&id=([0-9]+)$ home.php?op=topic&id=$1 [L]
+RewriteRule ^topic.php&id=([0-9]+)&n=([0-9]+)$ home.php?op=topic&id=$1&n=$2 [L]
+RewriteRule ^blog.html$ home.php?page=blog [L]
+RewriteRule ^last.html$ home.php?page=last [L]
+RewriteRule ^sticky.html$ home.php?page=sticky [L]
+RewriteRule ^forums.html$ home.php?page=forums [L]
+RewriteRule ^mixt.html$ home.php?page=mixt [L]
+RewriteRule ^notifications.html$ home.php?op=noti [L]
+RewriteRule ^profile.php$ users.php?op=profile [L]
+RewriteRule ^profile.edit$ users.php?op=edit.profile [L]
+RewriteRule ^edit.sig$ users.php?op=edit.sig [L]
+RewriteRule ^friends$ users.php?op=friends [L]
+RewriteRule ^friends.add$ users.php?op=friends&type=add&u=$1 [L]
+RewriteRule ^friends.accp$ users.php?op=friends&type=accept&u=$1 [L]
+
+RewriteRule ^register.php index.php?op=register [L]
+RewriteRule ^sign-up.joined index.php?op=joined [L]
+
+
+#RewriteRule ^topic([0-9]+)$ topic.php?id=$1 [L]
+#RewriteRule ^user([0-9]+)$ user.php?id=$1 [L]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#RewriteRule ^(.+)$ index.php?uri=$1 [QSA,L]
+#RewriteRule ^(.+)$ forum.php?id=$1 [QSA,L]
+
+
+#RewriteRule ^members ?op=users [L]
+#RewriteRule ^forum([0-9]+)$ ?op=forum&id=$1 [L]
+#RewriteRule ^topic([0-9]+)$ ?op=topic&id=$1 [L]
