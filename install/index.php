@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//Ddiv XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+	<head>
+<meta charset="utf-8"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=12.0, minimum-scale=.25, user-scalable=yes" name="viewport"/>
 	<link href="../system/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -11,14 +12,13 @@
 	<link rel="stylesheet" href="../system/css/style.css" type="text/css"  />
 	<link rel="stylesheet" href="../system/css/cairo.css">
 	<link rel="stylesheet" href="../system/css/font-awesome.min.css">
-	<title><?= '*forum*-التنصيب'?></title>
-</head>
+	<title><?= '*forum*-التنصيب' ?></title> <!-- Changed. -->
+	</head>
 <body>
-
 <?php
+
 	$op = trim($_GET['op'] ?? '');
 	define("op", $op);
-	
 	$opi = trim($_GET['opi'] ?? '');
 	define("opi", $opi);
 
@@ -33,17 +33,15 @@
 if ($op == "") {
 
 			echo '
-<div class="container-fluid">
-<div class=""><center>
-  <h4>أهلا بك في صفحة تنصيب النسخة فووريم</h4>
-  <p>قم بإنشاء قاعدة بيانات جديدة وأدخل المعلومات المطلوبة في الاسفل</p>
-  
-</div>
-</div>
-';
+			<div class="container-fluid">
+				<div class=""><center>
+					<h4>أهلا بك في صفحة تنصيب النسخة فووريم</h4>
+					<p>قم بإنشاء قاعدة بيانات جديدة وأدخل المعلومات المطلوبة في الاسفل</p>
+				</div>
+			</div>';
 
                     ?>
-					<form method="post" action="index.php?op=0">
+					<form method="GET" action="index.php?op=0">
 	                <center>
 	                <table width="60%" border="1">
 	                   <tr class="normal">
@@ -81,7 +79,7 @@ if ($op == "") {
 	                   </tr>
 	                </table>
 	                </center>
-					</form><?
+					</form><?php
 
 
 }
@@ -90,11 +88,11 @@ if ($op == "0") {
 
 
 
-$dbhost = htmlspecialchars(trim($_POST[dbhost]));
-$dbuser = htmlspecialchars(trim($_POST[dbuser]));
-$dbpass = htmlspecialchars(trim($_POST[dbpass]));
-$dbname = htmlspecialchars(trim($_POST[dbname]));
-$Prefix = htmlspecialchars(trim($_POST[dbprefix]));
+$dbhost = htmlspecialchars(trim($_POST['dbhost']));
+$dbuser = htmlspecialchars(trim($_POST['dbuser']));
+$dbpass = htmlspecialchars(trim($_POST['dbpass']));
+$dbname = htmlspecialchars(trim($_POST['dbname']));
+$Prefix = htmlspecialchars(trim($_POST['dbprefix']));
 
 if($dbhost != "" && $dbuser != "" && $dbpass != "" && $dbname != "" && $Prefix != ""){
 		$connection_file = '../inc____/class.database.php';
@@ -155,18 +153,4 @@ if ($replaced)
   <p><a class="btn btn-primary btn-lg" href="install.php?op=dbconfig" role="button">تنصيب الجداول</a></p>
 </div>
 </div>
-';
-}
-
-
-
-
-
-
-
-
-
-
-
-
-?>
+'; }
