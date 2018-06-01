@@ -1,27 +1,30 @@
 <?php
-if (file_exists("install/new.php"))
-                {
-                header("Location: install/new.php");
-                }
+if (file_exists("install/install.php"))
+{
+    header("Location: install/new.php");
+}
+
 require_once 'global.php';
 
 if ($user->is_loggedin() != "")
-                {
-                $user->redirect('blog.html');
-                }
+{
+    $user->redirect('blog.html');
+}
+
+
 if (op == "")
-                {
-                $title = "الدخول";
-                $body  = "signin";
-                include("system/header.php");
-                $tpl->login();
-                }
+{
+    $title = "الدخول";
+    $body  = "signin";
+    include("system/header.php");
+    $tpl->login();
+}
 elseif (op == "register")
-                {
-                $tpl->register();
-                }
+{
+    $tpl->register();
+}
 elseif (op == "joined")
-                {
-                $tpl->register();
-                }
-?> 
+{
+    $tpl->register();
+}
+

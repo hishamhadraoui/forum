@@ -1,7 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//Ddiv XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-<meta charset="utf-8"/>
+<!DOCTYPE html>
+<html>
+<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=12.0, minimum-scale=.25, user-scalable=yes" name="viewport"/>
 	<link href="../system/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -12,7 +11,7 @@
 	<link rel="stylesheet" href="../system/css/style.css" type="text/css"  />
 	<link rel="stylesheet" href="../system/css/cairo.css">
 	<link rel="stylesheet" href="../system/css/font-awesome.min.css">
-	<title><?= '*forum*-التنصيب' ?></title> <!-- Changed. -->
+	<title><?php echo '*forum*-التنصيب'; ?></title> <!-- Changed. -->
 	</head>
 <body>
 <?php
@@ -68,11 +67,11 @@ if ($op == "") {
 	                       <td>بادئة القاعدة</td><td><input type="text" name="dbprefix" value="f__">
 						   <i class="fa fa-question-circle" aria-hidden="true" onclick="alert('ضع بريفيكس القاعدة\n\r eg: f__');" ></i></td>
 									</tr>
-										
+
 									<tr>
 	                       <td align="center" colspan="2"><input type="submit" value="ادخال المعلومات"></td>
 									</tr>
-									
+
 								</table>
 						   <br><br>
 	                       </td>
@@ -94,7 +93,7 @@ $dbpass = htmlspecialchars(trim($_POST['dbpass']));
 $dbname = htmlspecialchars(trim($_POST['dbname']));
 $Prefix = htmlspecialchars(trim($_POST['dbprefix']));
 
-if($dbhost != "" && $dbuser != "" && $dbpass != "" && $dbname != "" && $Prefix != ""){
+if($dbhost != "" && $dbuser != ""  && $dbname != "" && $Prefix != ""){
 		$connection_file = '../inc____/class.database.php';
 		$tmp_file = '../inc____/class.database.php.tmp';
 
@@ -127,7 +126,7 @@ if($dbhost != "" && $dbuser != "" && $dbpass != "" && $dbname != "" && $Prefix !
 		  fputs($writing, $line);
 		}
 		fclose($reading); fclose($writing);
-if ($replaced) 
+if ($replaced)
 		{
 					  @file_put_contents($connection_file, file_get_contents($tmp_file)) or die ('
 							<center>
@@ -147,10 +146,11 @@ if ($replaced)
 
 				echo '
 <div class="container-fluid">
-<div class=""><center>  
+<div class=""><center>
 <p>الانتقال للمرحة التالية</p>
   <p>التنصيب يكون مرة واحدة فقط، بعدها إذا أردت التعديل أو إضافة برمجيات للنسخة فيجب أن يكون لذيك خبرة في البرمجة</p>
   <p><a class="btn btn-primary btn-lg" href="install.php?op=dbconfig" role="button">تنصيب الجداول</a></p>
 </div>
 </div>
-'; }
+';
+}
