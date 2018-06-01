@@ -2,12 +2,9 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=12.0, minimum-scale=.25, user-scalable=yes" name="viewport"/>
 	<link href="../system/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="../system/css/bootstrap-rtl.min.css" rel="stylesheet" media="screen">
 	<link href="../system/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
-	<script type="text/javascript" src="../system/js/jquery-1.11.3-jquery.min.js"></script>
-	<script src="../system/js/jquery.min.js"></script>
 	<link rel="stylesheet" href="../system/css/style.css" type="text/css"  />
 	<link rel="stylesheet" href="../system/css/cairo.css">
 	<link rel="stylesheet" href="../system/css/font-awesome.min.css">
@@ -40,7 +37,7 @@ if ($op == "") {
 			</div>';
 
                     ?>
-					<form method="GET" action="index.php?op=0">
+					<form method="POST" action="index.php?op=0">
 	                <center>
 	                <table width="60%" border="1">
 	                   <tr class="normal">
@@ -87,11 +84,11 @@ if ($op == "0") {
 
 
 
-$dbhost = htmlspecialchars(trim($_POST['dbhost']));
-$dbuser = htmlspecialchars(trim($_POST['dbuser']));
-$dbpass = htmlspecialchars(trim($_POST['dbpass']));
-$dbname = htmlspecialchars(trim($_POST['dbname']));
-$Prefix = htmlspecialchars(trim($_POST['dbprefix']));
+$dbhost = $_POST['dbhost'];
+$dbuser = $_POST['dbuser'];
+$dbpass = $_POST['dbpass'];
+$dbname = $_POST['dbname'];
+$Prefix = $_POST['dbprefix'];
 
 if($dbhost != "" && $dbuser != ""  && $dbname != "" && $Prefix != ""){
 		$connection_file = '../inc____/class.database.php';
@@ -126,9 +123,9 @@ if($dbhost != "" && $dbuser != ""  && $dbname != "" && $Prefix != ""){
 		  fputs($writing, $line);
 		}
 		fclose($reading); fclose($writing);
-if ($replaced)
+		if ($replaced)
 		{
-					  @file_put_contents($connection_file, file_get_contents($tmp_file)) or die ('
+					  file_put_contents($connection_file, file_get_contents($tmp_file)) or die ('
 							<center>
 							<table width="60%" border="1">
 							   <tr class="normal">
@@ -139,8 +136,8 @@ if ($replaced)
 							   </tr>
 							</table>
 							</center>');
-		  unlink($tmp_file);
 		}
+		  unlink($tmp_file);
 
 }
 
@@ -154,3 +151,9 @@ if ($replaced)
 </div>
 ';
 }
+?>
+	<script type="text/javascript" src="../system/js/jquery-1.11.3-jquery.min.js"></script>
+	<script src="../system/js/jquery.min.js"></script>
+</body>
+
+</html>

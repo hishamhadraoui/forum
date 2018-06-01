@@ -1,13 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//Ddiv XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=12.0, minimum-scale=.25, user-scalable=yes" name="viewport"/>
 	<link href="../system/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="../system/css/bootstrap-rtl.min.css" rel="stylesheet" media="screen">
 	<link href="../system/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
-	<script type="text/javascript" src="../system/js/jquery-1.11.3-jquery.min.js"></script>
-	<script src="../system/js/jquery.min.js"></script>
 	<link rel="stylesheet" href="../system/css/style.css" type="text/css"  />
 	<link rel="stylesheet" href="../system/css/cairo.css">
 	<link rel="stylesheet" href="../system/css/font-awesome.min.css">
@@ -18,7 +15,7 @@
 
 	$op = trim($_GET['op'] ?? '');
 	define("op", $op);
-	
+
 	$opi = trim($_GET['opi'] ?? '');
 	define("opi", $opi);
 
@@ -53,8 +50,8 @@ if (op == "dbconfig") {
 <center>
 <div class="col-lg-6">
 
-<div class="row"> 
-  
+<div class="row">
+
   <div class="bg-success col-lg-6">الهوست</div>
   <div class="bg-info col-lg-6">';
 				echo $dbc->______getvar('host');
@@ -70,17 +67,17 @@ if (op == "dbconfig") {
   <div class="bg-success col-lg-6">باس اليوزر</div>
   <div class="bg-info col-lg-6">';
 				echo $dbc->______getvar('password');
-				echo '</div>  
-  
-  
+				echo '</div>
+
+
  </div>
  </div>
- 
- 
+
+
  <p>إذا كانت هذه هي المعلومات التي أدخلتها يمكنك البدأ بتنصيب الجداول</p>
  <p><a class="btn btn-primary btn-lg" href="install.php?op=addtables" role="button">تنصيب الجداول</a></p>
- 
- 
+
+
  </div>
 ';
 } //op == "dbconfig"
@@ -207,10 +204,10 @@ if (op == "dbconfig") {
 																				$error[] = "الاميل مسجل من قبل !";
 																} //$row['user_email'] == $umail
 																else {
-																				
+
 																				try {
 																								$new_password = password_hash($upass, PASSWORD_DEFAULT);
-																								$stmt         = $dbc->runQuery("INSERT INTO ".prx."users(user_name,user_email,user_pass,user_age,user_gender,user_group, is_admin) 
+																								$stmt         = $dbc->runQuery("INSERT INTO ".prx."users(user_name,user_email,user_pass,user_age,user_gender,user_group, is_admin)
 																		   VALUES(:uname, :umail, :upass, :uage, :ugender, :ugroup, :isadmin)");
 																								$stmt->bindparam(":uname", $uname);
 																								$stmt->bindparam(":umail", $umail);
@@ -233,13 +230,13 @@ if (op == "dbconfig") {
 												}
 								}
 				} //isset($_POST['btn-signup'])
-				
+
 ?>
 
 
 
 <div class="container">
-    	
+
         <form method="post"   class="form-signin">
             <h2 class="form-signin-heading">معلومات المدير الأول</h2><hr />
             <?php
@@ -257,7 +254,7 @@ if (op == "dbconfig") {
 				else if (opi == "joined") {
 ?>
              <div class="alert alert-info">
-                <i class="glyphicon glyphicon-log-in"></i> &nbsp; تم تسجيل عضوية جديدة بنجاح 
+                <i class="glyphicon glyphicon-log-in"></i> &nbsp; تم تسجيل عضوية جديدة بنجاح
 				<br><strong><a href='install.php?op=optionsite'>الإنتقال للمرحلة التالية</a></strong><br>
               </div>
              <?php
@@ -272,13 +269,13 @@ if (op == "dbconfig") {
             <div class="form-group">
             	<input type="password" class="form-control" name="txt_upass" placeholder="كلمة المرور" />
             </div>
-            
-            
-            			
-            			
+
+
+
+
 			<div class="form-group">
             	<input type="number" class="form-control" name="txt_uage" min="13" max="100" placeholder="العمر (من 13 الى 100) سنة" />
-            </div>			
+            </div>
 			<div class="form-group">
 			<select id="selectbasic" name="txt_ugender" class="form">
 			  <option value="1">ذكر</option>
@@ -286,10 +283,10 @@ if (op == "dbconfig") {
 			</select>
 			</div>
 
-			
-            
-            
-            
+
+
+
+
             <div class="clearfix"></div><hr />
             <div class="form-group">
             	<button type="submit" class="btn btn-primary" name="btn-signup">
@@ -303,8 +300,8 @@ if (op == "dbconfig") {
 
 <?php
 				echo '</td></tr></table></tr></center><br><br><br>';
-				
-				
+
+
 } //op == "adminregister"
 				elseif (op == "optionsite") {
 				echo '<nav class="navbar navbar-default">
@@ -332,9 +329,9 @@ if (op == "dbconfig") {
 												if (update_option(title_nm, $title) && update_option(adress_nm, $adress) && update_option(description_nm, $description) && update_option(logo_nm, $logo)) {
 ?>
 							 <div class="alert alert-info">
-						&nbsp; تم ادخال المعلومات بنجاح 
+						&nbsp; تم ادخال المعلومات بنجاح
 						<br><strong><a href='install.php?op=theend'>الإنتقال للمرحلة الأخيرة</a></strong><br>
-						
+
 							 </div>
 							 <?php
 												} //update_option(title_nm, $title) && update_option(adress_nm, $adress) && update_option(description_nm, $description) && update_option(logo_nm, $logo)
@@ -366,15 +363,15 @@ if (op == "dbconfig") {
 ?>"   />
             </div>
 			</div>
-			
+
 			<div class="form-group">
             <label for="exampleInputName2"  class="col-sm-3 list-group-item active">رابط لوغو الموقع</label>
 			<div class="col-sm-9"><input type="text" class="form-control" name="txt_logo_op" value="<?php echo logo_op; ?>"  placeholder="<?php
 				echo logo_op;
 ?>"  />
             </div>
-			</div>			
-		
+			</div>
+
             <div class="clearfix"></div><hr />
             <div class="form-group">
             	<button type="submit" class="btn btn-primary" name="btn-option">
@@ -382,15 +379,15 @@ if (op == "dbconfig") {
                 </button>
             </div>
             <br />
- 
+
         </form>
 <?php
 				echo '</td></tr></table></tr></center><br><br><br>';
-} //op == "optionsite"
+}
 				elseif (op == "theend") {
 				require_once('../inc____/class.session.php');
 				$session->kill();
-				
+
 				echo '<nav class="navbar navbar-default">
 <div class="container-fluid">
 <ul class="nav navbar-nav">
@@ -406,15 +403,19 @@ if (op == "dbconfig") {
 </nav>';
 				echo '<center><tr><table width="92%"><tr>
 <td class="alert alert-success" width="50%"><center>';
-				echo ' 
+				echo '
 <div class="alert alert-info">
                 &nbsp; ألف مبروك تم تنصيب النسخة بنجاح الآن يمكنك الدخول لموقعك
 				<br><br><strong><a href="../index.php">الإنتقال لرئيسية الموقع</a></strong><br>
 				<br><strong><font color="red">   لا تنسى حذف الملف install أو إعادة تسميته باسم مغاير.</font></strong><br>
-				
+
 </div>
 ';
 @unlink("new.php");
 				echo '</td></tr></table></tr></center><br><br><br>';
-} //op == "theend"
+}
 ?>
+	<script type="text/javascript" src="../system/js/jquery-1.11.3-jquery.min.js"></script>
+	<script src="../system/js/jquery.min.js"></script>
+</body>
+</html>
