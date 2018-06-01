@@ -1,7 +1,7 @@
 <?php
 if (file_exists("install/install.php"))
 {
-    header("Location: install/new.php");
+    header("Location: install/index.php");
 }
 
 require_once 'global.php';
