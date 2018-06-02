@@ -2,53 +2,53 @@
 
 
 
-$forums = "CREATE TABLE ".prx."forums ( ".
+$forums = "CREATE TABLE ".prx."forums ( ".        		// جدوال الفئات والمنتديات
 		  "f_id int(30) NOT NULL AUTO_INCREMENT,".
 		  "f_name varchar(250) NOT NULL,".
 		  "f_desc varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,".
-		  "f_type int(11) DEFAULT NULL,".
-		  "f_cat int(11) DEFAULT NULL,".
+		  "f_type int(11) DEFAULT NULL,".				// النوع : منتدى(0) - فئة(1) ا
+		  "f_cat int(11) DEFAULT NULL,".     // رقم ايدي الفئة التي ينتمي لها المنتدى
 		  "f_icon varchar(100) NOT NULL DEFAULT 'img/flogo.png',".
-		  "f_t int(11) NOT NULL DEFAULT '0',".
-		  "f_r int(11) NOT NULL DEFAULT '0',".
-		  "f_bgc varchar(100) NOT NULL DEFAULT 'FFFFFF',".
-		  "f_gender int(11) NOT NULL DEFAULT '0',".
-		  "f_bg varchar(100) NOT NULL,".
+		  "f_t int(11) NOT NULL DEFAULT '0',".   //عدد مواضيع المنتدى
+		  "f_r int(11) NOT NULL DEFAULT '0',".  //عدد ردود المنتدى
+		  "f_bgc varchar(100) NOT NULL DEFAULT 'FFFFFF',".  //لون خلفية المنتدى
+		  "f_gender int(11) NOT NULL DEFAULT '0',".   // منتدى خاص بالجنس
+		  "f_bg varchar(100) NOT NULL,".  // صورة خلفية المنتدى
 		  "f_hid int(10) NOT NULL DEFAULT '0',".
-		  "f_blog int(11) NOT NULL DEFAULT '0',".
+		  "f_blog int(11) NOT NULL DEFAULT '0',".	// طريقة عرض المواضيع عادي0/مربعات1
 		  "PRIMARY KEY (f_id)".
 		  ") ENGINE=InnoDB DEFAULT CHARSET=utf8 ";
 
 $forums1 = "INSERT INTO ".prx."forums (f_id, f_name, f_desc, f_type, f_cat, f_icon, f_t, f_r, f_bgc, f_gender, f_bg, f_hid, f_blog) VALUES".
 			"(1, 'القسم العام', 'يضم المنتديات العامة', 0, 0, 'img/flogo.png', 0, 0, 'F00', 0, '', 0, 0),".
-			"(2, 'تعارف الاعضاء', 'بوابة المنتديات دردشة الاعضاء', 1, 1, 'img/_f5.png', 1, 1, 'FFEAE0', 0, 'img/bg_1.png', 0, 0)";
+			"(2, 'تعارف الاعضاء', 'بوابة المنتديات دردشة الاعضاء', 1, 1, 'img/_f5.png', 0, 0, 'FFEAE0', 0, 'img/bg_1.png', 0, 0)";
 
-$friends = 	  "CREATE TABLE ".prx."friends ( ".
+$friends = 	  "CREATE TABLE ".prx."friends ( ".    // جدزل الاصدقاء يظهر طلبات الصداقة واذا كان العضو صديق
 			  "fr_id int(11) NOT NULL AUTO_INCREMENT,".
-			  "fr1 int(11) NOT NULL,".
-			  "fr2 int(11) NOT NULL,".
-			  "fr_ok int(11) NOT NULL DEFAULT '0',".
+			  "fr1 int(11) NOT NULL,".    // ايدي العضو الاول
+			  "fr2 int(11) NOT NULL,".    // ايدي العضو الثاني
+			  "fr_ok int(11) NOT NULL DEFAULT '0',".   // عند الموافقة تصير القيمة1 
 			  "PRIMARY KEY (fr_id)".
 			  ") ENGINE=InnoDB DEFAULT CHARSET=utf8";
   
-$messages = "CREATE TABLE ".prx."messages (".
+$messages = "CREATE TABLE ".prx."messages (".   // الرسائل بين الاصدقاء فقط
 			 "id int(11) NOT NULL,".
-			 "msg_id int(11) NOT NULL,".
+			 "msg_id int(11) NOT NULL,".  //يتم استخراج الرسائل بالايدي من الجدول msg
 			 "user_id int(11) NOT NULL,".
 			 "message varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,".
 			"date int(11) NOT NULL,".
 			"PRIMARY KEY (id)".
 			") ENGINE=InnoDB DEFAULT CHARSET=utf8";
 
-$moderators = "CREATE TABLE ".prx."moderators (".
+$moderators = "CREATE TABLE ".prx."moderators (".   //  المشرفين او المراقبين على منتدى او فئة
 			  "mod_id int(11) NOT NULL AUTO_INCREMENT,".
-			  "mod_level int(11) NOT NULL,".
-			  "user_id int(11) NOT NULL,".
-			  "f_id int(11) NOT NULL,".
+			  "mod_level int(11) NOT NULL,".  // ياخد من مجموعة العضو  usergroup لتعيين كمشرف او مراقب...
+			  "user_id int(11) NOT NULL,".  // ايدي العضو
+			  "f_id int(11) NOT NULL,".   // ايدي المنتدى او الفئة
 			  "PRIMARY KEY (mod_id)".
 			") ENGINE=InnoDB DEFAULT CHARSET=utf8";
 
-$msg = "CREATE TABLE ".prx."msg (".
+$msg = "CREATE TABLE ".prx."msg (".  // جلسات الشات مع الاصدقاء بين كل عضوين ايدي ثابت
 			  "msg_id int(11) NOT NULL,".
 			  "user_s int(11) NOT NULL,".
 			  "user_r int(11) NOT NULL,".
@@ -56,12 +56,12 @@ $msg = "CREATE TABLE ".prx."msg (".
 			  "PRIMARY KEY (msg_id)".
 			  ") ENGINE=InnoDB DEFAULT CHARSET=utf8";
 			
-$notifications = "CREATE TABLE ".prx."notifications (".
+$notifications = "CREATE TABLE ".prx."notifications (".  // جدول الاشعارات
   "n_id int(11) NOT NULL AUTO_INCREMENT,".
-  "user_in int(11) NOT NULL,".
-  "user_out int(11) NOT NULL,".
-  "n_type int(100) NOT NULL,".
-  "n_hide int(11) DEFAULT '0',".
+  "user_in int(11) NOT NULL,".  // ايدي العضو الذي يصله اشعار
+  "user_out int(11) NOT NULL,".  // العضو المشارك او المعجب
+  "n_type int(100) NOT NULL,".   // نوع الاشعار
+  "n_hide int(11) DEFAULT '0',".  // قراءة الاشعار زضع القيمة1
   "t_id int(11) NOT NULL,".
   "r_id int(11) NOT NULL,".
   "xr_id int(11) NOT NULL,".
@@ -73,7 +73,7 @@ $notifications = "CREATE TABLE ".prx."notifications (".
 
   
 
-$options = "CREATE TABLE ".prx."options (".
+$options = "CREATE TABLE ".prx."options (".  // خيارات الموقع العامة
   "option_id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
   "option_name varchar(30) DEFAULT NULL,".
   "option_value varchar(300) DEFAULT NULL,".
@@ -129,9 +129,9 @@ $permissions = "CREATE TABLE ".prx."permissions (".
 
   
 
-$replys = "CREATE TABLE ".prx."replys (".
+$replys = "CREATE TABLE ".prx."replys (".   // جدول الردود
   "r_id int(10) NOT NULL AUTO_INCREMENT,".
-  "t_id int(10) NOT NULL,".
+  "t_id int(10) NOT NULL,".  // ايدي الموضوع
   "user_id int(11) NOT NULL,".
   "r_msg mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,".
   "r_date int(11) NOT NULL,".
@@ -141,9 +141,9 @@ $replys = "CREATE TABLE ".prx."replys (".
 
  
 
-$replys_likes = "CREATE TABLE ".prx."replys_likes (".
+$replys_likes = "CREATE TABLE ".prx."replys_likes (".   // الاعجابات بالرد
   "l_id int(10) NOT NULL AUTO_INCREMENT,".
-  "r_id int(10) NOT NULL,".
+  "r_id int(10) NOT NULL,".   // ايدي الرد
   "user_id int(10) NOT NULL,".
   "l_date int(10) NOT NULL,".
   "r_like int(11) NOT NULL DEFAULT '1',".
@@ -152,7 +152,7 @@ $replys_likes = "CREATE TABLE ".prx."replys_likes (".
 
  
 
-$replys_op = "CREATE TABLE ".prx."replys_op (".
+$replys_op = "CREATE TABLE ".prx."replys_op (".   // التحكم في الردود لكل مجموعة
   "opr_id int(11) NOT NULL AUTO_INCREMENT,".
   "group_l int(11) NOT NULL,".
   "add_reply int(11) NOT NULL DEFAULT '1',".
@@ -182,15 +182,15 @@ $replys_op1 = "INSERT INTO ".prx."replys_op (opr_id, group_l, add_reply, edit_my
 
   
 
-$topics = "CREATE TABLE ".prx."topics (".
+$topics = "CREATE TABLE ".prx."topics (".  // جدول المواضيع
   "t_id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,".
-  "f_id int(10) NOT NULL,".
-  "user_id int(10) NOT NULL,".
+  "f_id int(10) NOT NULL,".    // ايدي المنتدى
+  "user_id int(10) NOT NULL,".   // كاتب الموضوع
   "t_name varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,".
   "t_msg text COLLATE utf8mb4_unicode_ci NOT NULL,".
   "t_date int(10) UNSIGNED NOT NULL,".
   "t_img varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,".
-  "t_cr int(10) NOT NULL,".
+  "t_cr int(10) NOT NULL,".   // عدد الردود في الموضوع
   "t_cl int(10) NOT NULL DEFAULT '0',".
   "t_views int(100) NOT NULL DEFAULT '0',".
   "t_sticky tinyint(1) NOT NULL,".
@@ -205,12 +205,12 @@ $topics = "CREATE TABLE ".prx."topics (".
 
   
 
-$topics_likes = "CREATE TABLE ".prx."topics_likes (".
+$topics_likes = "CREATE TABLE ".prx."topics_likes (".   // الاعجابات بالموضوع
   "l_id int(10) NOT NULL AUTO_INCREMENT,".
   "t_id int(10) NOT NULL,".
   "user_id int(10) NOT NULL,".
   "l_date int(10) NOT NULL,".
-  "t_like int(11) NOT NULL DEFAULT '1',".
+  "t_like int(11) NOT NULL DEFAULT '1',".  //عند الغاء الاعجاب تاخد القيمة0
   "PRIMARY KEY (l_id)".
 ") ENGINE=InnoDB DEFAULT CHARSET=utf8";
 
@@ -219,7 +219,7 @@ $topics_likes = "CREATE TABLE ".prx."topics_likes (".
 
   
 
-$topics_op = "CREATE TABLE ".prx."topics_op (".
+$topics_op = "CREATE TABLE ".prx."topics_op (". // خيارات التحكم بالموضوع التي تعطى لمجموعة معية
   "opt_id int(11) NOT NULL AUTO_INCREMENT,".
   "group_l int(11) NOT NULL,".
   "add_topic int(11) NOT NULL DEFAULT '1',".
@@ -254,7 +254,7 @@ $topics_op1 = "INSERT INTO ".prx."topics_op (opt_id, group_l, add_topic, edit_my
 
   
 
-$ugroups = "CREATE TABLE ".prx."ugroups (".
+$ugroups = "CREATE TABLE ".prx."ugroups (".   // مجموات الاعضاء تاخد التصاريح من topics_op و replys_op 
   "group_id int(11) NOT NULL AUTO_INCREMENT,".
   "group_l int(11) NOT NULL,".
   "group_name varchar(250) NOT NULL,".
@@ -281,7 +281,7 @@ $ugroups1 = "INSERT INTO ".prx."ugroups (group_id, group_l, group_name, group_co
 
   
 
-$users = "CREATE TABLE ".prx."users (".
+$users = "CREATE TABLE ".prx."users (".   // جدول الاعضاء
   "user_id int(11) NOT NULL AUTO_INCREMENT,".
   "user_name varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,".
   "user_email varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,".
@@ -295,12 +295,12 @@ $users = "CREATE TABLE ".prx."users (".
   "user_myo varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,".
   "user_mgp varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,".
   "user_gender int(10) NOT NULL,".
-  "user_to int(100) NOT NULL DEFAULT '0',".
-  "user_re int(100) NOT NULL DEFAULT '0',".
+  "user_to int(100) NOT NULL DEFAULT '0',".   // عدد المواضيع
+  "user_re int(100) NOT NULL DEFAULT '0',".   // عدد الردود
   "user_sig text COLLATE utf8mb4_unicode_ci NOT NULL,".
   "user_age int(100) NOT NULL,".
   "friend_count int(11) NOT NULL,".
-  "is_admin int(11) NOT NULL DEFAULT '0',".
+  "is_admin int(11) NOT NULL DEFAULT '0',".   // هل العضو مدير
   "PRIMARY KEY (user_id)".
 ") ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci";
 
@@ -309,7 +309,7 @@ $users = "CREATE TABLE ".prx."users (".
 
   
 
-$xreplys = "CREATE TABLE ".prx."xreplys (".
+$xreplys = "CREATE TABLE ".prx."xreplys (".  // جدول الردود او التعليقات تحت الردود
   "xr_id int(10) NOT NULL AUTO_INCREMENT,".
   "r_id int(11) NOT NULL,".
   "user_id int(11) NOT NULL,".
