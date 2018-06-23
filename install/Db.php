@@ -32,7 +32,7 @@ $friends = 	  "CREATE TABLE ".prx."friends ( ".    // جدزل الاصدقاء 
 			  ") ENGINE=InnoDB DEFAULT CHARSET=utf8";
   
 $messages = "CREATE TABLE ".prx."messages (".   // الرسائل بين الاصدقاء فقط
-			 "id int(11) NOT NULL,".
+			 "id int(11) NOT NULL AUTO_INCREMENT,".
 			 "msg_id int(11) NOT NULL,".  //يتم استخراج الرسائل بالايدي من الجدول msg
 			 "user_id int(11) NOT NULL,".
 			 "message varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,".
@@ -49,7 +49,7 @@ $moderators = "CREATE TABLE ".prx."moderators (".   //  المشرفين او ا
 			") ENGINE=InnoDB DEFAULT CHARSET=utf8";
 
 $msg = "CREATE TABLE ".prx."msg (".  // جلسات الشات مع الاصدقاء بين كل عضوين ايدي ثابت
-			  "msg_id int(11) NOT NULL,".
+			  "msg_id int(11) NOT NULL AUTO_INCREMENT,".
 			  "user_s int(11) NOT NULL,".
 			  "user_r int(11) NOT NULL,".
 			  "date int(11) NOT NULL,".
